@@ -75,7 +75,7 @@ class Request
      *
      * @return string|null
      */
-    public function header(string $key, $default = ''): ?string
+    public function header(string $key, $default = null): ?string
     {
         return $this->request->headers->get($key, $default);
     }
@@ -207,7 +207,10 @@ class Request
      */
     public function isFinal(): bool
     {
-        return false !== strpos($this->header('Upload-Concat'), Server::UPLOAD_TYPE_FINAL . ';');
+        if($this->header('Upload-Concat')) {
+            return false !== strpos($this->header('Upload-Concat'), Server::UPLOAD_TYPE_FINAL . ';');
+        }
+        return false;
     }
 
     /**
