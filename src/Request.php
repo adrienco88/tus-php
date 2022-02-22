@@ -75,7 +75,7 @@ class Request
      *
      * @return string|null
      */
-    public function header(string $key, $default = null): ?string
+    public function header(string $key, $default = ''): ?string
     {
         return $this->request->headers->get($key, $default);
     }
